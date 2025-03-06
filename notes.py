@@ -1,132 +1,156 @@
-# Lesson 6: Object Oriented Programming - Notes and Key Takeaways
+# Lesson 6: Object-Oriented Programming (OOP) - Summary Notes
 
-# ===========================
-# engage and apply ---------> Key Concept: Object-Oriented Programming (OOP)
-# ===========================
+# Brief Overview:
+# In this lesson, we explore the fundamentals of Object-Oriented Programming (OOP) in Python.
+# OOP allows us to model real-world objects and concepts as classes and objects. 
+# This approach helps in structuring code for reusability, modularity, and scalability.
 
-# OOP is a programming paradigm based on the concept of objects, which are instances of classes.
-# Key OOP Concepts:
-# 1. Class: A blueprint for creating objects (instances).
-# 2. Object: An instance of a class.
-# 3. Methods: Functions defined within a class that operate on the object.
-# 4. Attributes: Variables that hold data specific to an object.
-# 5. Inheritance: A mechanism to create a new class based on an existing class.
-# 6. Encapsulation: Bundling the data and methods that operate on the data within one unit.
-# 7. Polymorphism: The ability to use the same method name but have it behave differently based on the object.
+# Key Concepts Covered:
 
-# Example of Class and Object in Python
-class Dog:
-    def __init__(self, name, age):
-        # Instance Attributes
-        self.name = name
-        self.age = age
+# 1. Classes and Objects:
+# - A class is a blueprint for creating objects. It defines attributes (properties) 
+#   and methods (functions) that the objects of the class will have.
+# - An object is an instance of a class. It contains the actual data and behavior 
+#   defined in the class.
 
-    def speak(self):
-        return f"{self.name} says Woof!"
+# Example:
+class Car:
+    def __init__(self, make, model, mileage=0):
+        self.make = make
+        self.model = model
+        self.mileage = mileage
 
-# Creating an object (instance) of the Dog class
-dog1 = Dog("Rex", 4)
-print(dog1.speak())  # Output: Rex says Woof!
+    def display_info(self):
+        return f"{self.make} {self.model}, Mileage: {self.mileage} miles"
 
-# ===========================
-# engage and apply ---------> Class, Methods, and Attributes in Practice
-# ===========================
+# Creating an object (instance) of the class
+my_car = Car("Toyota", "Corolla", 10000)
+print(my_car.display_info())  # Output: Toyota Corolla, Mileage: 10000 miles
 
-# To create a class in Python, use the "class" keyword. Define methods with "def" and include the self parameter to refer to the instance.
-# Example of adding a method that modifies an object's state.
+# 2. The `__init__` Method (Constructor):
+# - The `__init__` method is the constructor in Python. It's called when an object 
+#   is instantiated and is used to initialize the object's attributes.
 
+# Example:
 class Person:
     def __init__(self, name, age):
-        # Instance Attributes
         self.name = name
         self.age = age
 
-    def greet(self):
-        return f"Hello, my name is {self.name}!"
-
-    def have_birthday(self):
-        self.age += 1
-        return f"Happy Birthday! You are now {self.age} years old."
-
-# Creating an object and interacting with its methods
+# Creating an object of the Person class
 person1 = Person("Alice", 25)
-print(person1.greet())  # Output: Hello, my name is Alice!
-print(person1.have_birthday())  # Output: Happy Birthday! You are now 26 years old.
+print(person1.name)  # Output: Alice
+print(person1.age)   # Output: 25
 
-# ===========================
-# final challenge ---------> Using OOP for Practical Applications
-# ===========================
+# 3. Instance Attributes and Methods:
+# - Instance attributes are variables that belong to an instance (object) of the class.
+# - Instance methods are functions defined inside the class that operate on instance 
+#   attributes.
 
-# Task: Create a BankAccount class to simulate a bank account with deposit and withdrawal functionality.
-# The BankAccount class includes the following methods:
-# - __init__: Initializes the account holder name and balance.
-# - deposit: Adds funds to the account.
-# - withdraw: Subtracts funds from the account, ensuring sufficient funds are available.
-# - get_balance: Returns the current balance of the account.
-
+# Example:
 class BankAccount:
     def __init__(self, account_holder, balance=0):
-        # Instance Attributes
         self.account_holder = account_holder
         self.balance = balance
 
     def deposit(self, amount):
-        if amount > 0:
-            self.balance += amount
-            return f"Deposited ${amount}. New balance: ${self.balance}"
-        else:
-            return "Deposit amount must be positive."
+        self.balance += amount
+        return f"Deposited ${amount}. New balance: ${self.balance}"
 
     def withdraw(self, amount):
-        if 0 < amount <= self.balance:
+        if amount <= self.balance:
             self.balance -= amount
             return f"Withdrew ${amount}. New balance: ${self.balance}"
         else:
-            return "Insufficient funds or invalid amount."
+            return "Insufficient funds."
 
-    def get_balance(self):
-        return f"Current balance: ${self.balance}"
-
-# Example Usage of BankAccount class
+# Creating an object of BankAccount
 account = BankAccount("Alice", 100)
-print(account.get_balance())  # Output: Current balance: $100
-print(account.deposit(50))  # Output: Deposited $50. New balance: $150
+print(account.deposit(50))   # Output: Deposited $50. New balance: $150
 print(account.withdraw(30))  # Output: Withdrew $30. New balance: $120
 
-# ===========================
-# final challenge ---------> Notes on Inheritance and Extending Functionality
-# ===========================
+# 4. Class Attributes and Methods:
+# - Class attributes are variables that belong to the class itself rather than 
+#   to instances of the class.
+# - Class methods are methods that operate on the class, not on an instance.
 
-# Inheritance allows us to create a new class that reuses the methods and attributes of an existing class.
-# This is useful when we want to extend the functionality of an existing class or create more specialized objects.
+# Example:
+class Dog:
+    species = "Canine"  # Class attribute
 
-class SavingsAccount(BankAccount):
-    def __init__(self, account_holder, balance=0, interest_rate=0.05):
-        # Call to the parent class's __init__ method
-        super().__init__(account_holder, balance)
-        # Additional attribute for interest rate
-        self.interest_rate = interest_rate
+    def __init__(self, name, age):
+        self.name = name  # Instance attribute
+        self.age = age    # Instance attribute
 
-    # Method to calculate interest
-    def add_interest(self):
-        interest = self.balance * self.interest_rate
-        self.balance += interest
-        return f"Interest added. New balance: ${self.balance}"
+    def speak(self):
+        return f"{self.name} says Woof!"
 
-# Example usage of SavingsAccount class (which inherits from BankAccount)
-savings_account = SavingsAccount("Bob", 500)
-print(savings_account.get_balance())  # Output: Current balance: $500
-print(savings_account.add_interest())  # Output: Interest added. New balance: $525.0
+# Creating an object of the Dog class
+dog = Dog("Buddy", 4)
+print(dog.speak())  # Output: Buddy says Woof!
+print(Dog.species)  # Output: Canine
 
-# ===========================
-# final challenge ---------> My Version Created
-# ===========================
+# 5. Inheritance:
+# - Inheritance allows one class (child class) to inherit the attributes and methods 
+#   of another class (parent class).
+# - This promotes code reuse and the creation of hierarchies.
 
-# Task: Extend the BankAccount class to include a SavingsAccount class with the ability to add interest.
+# Example:
+class Animal:
+    def __init__(self, name):
+        self.name = name
 
-# Sample Usage
-savings_account2 = SavingsAccount("Charlie", 1000, interest_rate=0.03)
+    def speak(self):
+        return f"{self.name} makes a sound"
 
-# Testing the new functionality
-print(savings_account2.get_balance())  # Output: Current balance: $1000
-print(savings_account2.add_interest())  # Output: Interest added. New balance: $1030.0
+# Inheriting from the Animal class
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+# Creating an object of the Dog class
+dog = Dog("Buddy")
+print(dog.speak())  # Output: Buddy says Woof!
+
+# 6. Polymorphism:
+# - Polymorphism allows objects of different classes to be treated as instances of the same class 
+#   through a common interface.
+# - Methods can be overridden in child classes, allowing different behavior for the same method.
+
+# Example:
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+# Creating objects of different classes
+animals = [Dog("Buddy"), Cat("Whiskers")]
+
+for animal in animals:
+    print(animal.speak())  
+# Output:
+# Buddy says Woof!
+# Whiskers says Meow!
+
+# 7. Encapsulation:
+# - Encapsulation refers to bundling the data (attributes) and methods that operate on the data 
+#   within a class, restricting access to some of the object's components.
+# - This can be achieved by making attributes private (by prefixing with _ or __) and providing 
+#   getter and setter methods.
+
+# Example:
+class Car:
+    def __init__(self, make, model):
+        self.__make = make  # Private attribute
+        self.__model = model  # Private attribute
+
+    def get_make(self):
+        return self.__make
+
+    def set_make(self, make):
+        self.__make = make
+
+# Creating an object of the Car class
+car = Car("Toyota", "Corolla")
+print(car.get_make())  # Output: Toyota
+car.set_make("Honda")
+print(car.get_make())  # Output: Honda

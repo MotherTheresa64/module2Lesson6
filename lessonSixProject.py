@@ -1,18 +1,46 @@
-# Lesson 6: Object Oriented Programming - Engage & Apply + Final Challenge
+# Lesson 6: Object-Oriented Programming Fundamentals - Engage & Apply + Final Challenge
 
 # ===========================
 # engage and apply ---------> Exercise 1 pre-provided
 # ===========================
 
-# Task: Create a class named `Person` with instance attributes name (string) and age (integer).
-# Add two instance methods:
-# - greet(): This method should return a greeting message that includes the person's name.
-# - have_birthday(): This method should increase the person's age by one and return a message that says,
-# "Happy Birthday! You are now [age] years old."
+# Task: Create a Car class with attributes like make, model, and mileage.
+# Also, define methods to display car information and update mileage after a drive.
 
+# Solution:
+class Car:
+    def __init__(self, make, model, mileage=0):
+        # Instance attributes
+        self.make = make
+        self.model = model
+        self.mileage = mileage
+
+    # Method to display car information
+    def display_info(self):
+        return f"{self.make} {self.model}, Mileage: {self.mileage} miles"
+
+    # Method to update mileage
+    def drive(self, miles):
+        self.mileage += miles
+        return f"Drove {miles} miles. Total mileage is now {self.mileage} miles."
+
+# Creating an instance of the Car class
+my_car = Car("Toyota", "Corolla", 10000)
+
+# Using the methods
+print(my_car.display_info())  # Output: Toyota Corolla, Mileage: 10000 miles
+print(my_car.drive(150))      # Output: Drove 150 miles. Total mileage is now 10150 miles
+
+# ===========================
+# engage and apply ---------> Exercise 1 My Version Created
+# ===========================
+
+# Task: Create a Person class with instance attributes name and age.
+# Include methods like greet() and have_birthday() to interact with the attributes.
+
+# Solution:
 class Person:
     def __init__(self, name, age):
-        # Instance Attributes
         self.name = name
         self.age = age
 
@@ -25,7 +53,7 @@ class Person:
         self.age += 1
         return f"Happy Birthday! You are now {self.age} years old."
 
-# Creating an instance of the Person class
+# Creating an instance of Person
 person1 = Person("Alice", 25)
 
 # Using the methods
@@ -33,34 +61,15 @@ print(person1.greet())            # Output: Hello, my name is Alice!
 print(person1.have_birthday())    # Output: Happy Birthday! You are now 26 years old.
 
 # ===========================
-# engage and apply ---------> Exercise 1 My Version Created
-# ===========================
-
-# Task: Create a `Person` class with name (string) and age (integer) attributes, and include two methods: greet() and have_birthday().
-# Write a script to interact with the `Person` class.
-
-# Sample Usage
-person2 = Person("Bob", 30)
-
-# Testing the methods
-print(person2.greet())            # Output: Hello, my name is Bob!
-print(person2.have_birthday())    # Output: Happy Birthday! You are now 31 years old.
-
-# ===========================
 # final challenge ---------> pre-provided
 # ===========================
 
-# Task: Create a BankAccount class with instance attributes:
-# - account_holder (string): The name of the account holder.
-# - balance (float): The current account balance, defaulting to 0.
-# Methods:
-# - deposit(amount): Adds the given amount to the account balance and returns a message showing the new balance.
-# - withdraw(amount): Subtracts the given amount from the balance if there are sufficient funds. Otherwise, it should return a message saying "Insufficient funds." If the withdrawal is successful, it should return the new balance.
-# - get_balance(): Returns a message displaying the current account balance.
+# Task: Create a BankAccount class with attributes like account_holder and balance.
+# Methods should include deposit, withdraw, and get_balance.
 
+# Solution:
 class BankAccount:
     def __init__(self, account_holder, balance=0):
-        # Instance Attributes
         self.account_holder = account_holder
         self.balance = balance
 
@@ -97,13 +106,28 @@ print(account.withdraw(200))    # Output: Insufficient funds or invalid amount.
 # final challenge ---------> My Version Created
 # ===========================
 
-# Task: Create a BankAccount class with attributes account_holder and balance, along with methods to deposit, withdraw, and check balance.
+# Task: Write a script to create a Person class with instance attributes name and age.
+# Add methods greet() and have_birthday() to interact with those attributes.
 
-# Sample Usage
-account2 = BankAccount("Bob", 500)
+# Solution:
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-# Testing the methods
-print(account2.get_balance())    # Output: Current balance: $500.00
-print(account2.deposit(100))     # Output: Deposited $100.00. New balance: $600.00
-print(account2.withdraw(150))    # Output: Withdrew $150.00. New balance: $450.00
-print(account2.withdraw(500))    # Output: Insufficient funds or invalid amount.
+    # Method to greet the person
+    def greet(self):
+        return f"Hi! I'm {self.name}, nice to meet you!"
+
+    # Method to simulate a birthday
+    def have_birthday(self):
+        self.age += 1
+        return f"Cheers! You're now {self.age} years old!"
+
+# Creating an instance of Person
+person2 = Person("Bob", 30)
+
+# Using the methods
+print(person2.greet())            # Output: Hi! I'm Bob, nice to meet you!
+print(person2.have_birthday())    # Output: Cheers! You're now 31 years old!
+
